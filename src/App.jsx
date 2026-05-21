@@ -43,7 +43,14 @@ export default function App() {
               ["⚙", "Integrations"],
               ["⚙", "Settings"],
             ].map(([icon, label, active]) => (
-              <div key={label} className={`flex items-center gap-3 rounded-xl px-4 py-3 ${active ? "bg-purple-200/80 text-purple-800 shadow-sm" : "text-purple-950 hover:bg-purple-100/70"}`}>
+              <div
+                key={label}
+                className={`flex items-center gap-3 rounded-xl px-4 py-3 ${
+                  active
+                    ? "bg-purple-200/80 text-purple-800 shadow-sm"
+                    : "text-purple-950 hover:bg-purple-100/70"
+                }`}
+              >
                 <span>{icon}</span>
                 <span>{label}</span>
               </div>
@@ -66,12 +73,18 @@ export default function App() {
         <header className="flex items-start justify-between border-b border-slate-200 pb-5">
           <div>
             <h1 className="text-4xl font-black tracking-tight">Revenue Command Center</h1>
-            <p className="text-slate-500 mt-1 text-lg">Executive overview of Nooma Studios performance</p>
+            <p className="text-slate-500 mt-1 text-lg">
+              Executive overview of Nooma Studios performance
+            </p>
           </div>
 
           <div className="flex items-center gap-3">
-            <button className="bg-white border border-slate-200 rounded-xl px-5 py-3 shadow-sm text-sm font-semibold">📅 May 1 – May 31, 2025⌄</button>
-            <button className="bg-white border border-slate-200 rounded-xl px-5 py-3 shadow-sm text-sm font-semibold">▽ Filters</button>
+            <button className="bg-white border border-slate-200 rounded-xl px-5 py-3 shadow-sm text-sm font-semibold">
+              📅 May 1 – May 31, 2025⌄
+            </button>
+            <button className="bg-white border border-slate-200 rounded-xl px-5 py-3 shadow-sm text-sm font-semibold">
+              ▽ Filters
+            </button>
           </div>
         </header>
 
@@ -88,31 +101,49 @@ export default function App() {
         </section>
 
         <section className="grid grid-cols-1 xl:grid-cols-3 gap-6">
-          <DriverCard title="Sales Health" accent="text-purple-700" action="View Full Report →" icon="funnel" rows={[
-            ["Leads", "1,240", "↑ 15%", "↑ 18%"],
-            ["Lead → First Visit", "40%", "↑ 6pp", "↑ 5pp"],
-            ["SCP → NCM", "43%", "↓ 2pp", "↑ 1pp"],
-            ["NCM → Recurring", "71%", "↑ 5pp", "↑ 4pp"],
-            ["Lead Response Time", "2.2 hrs", "", "↓ 1.2 hrs"],
-            ["Pipeline Value", "$1.24M", "", "↑ 18%"],
-          ]} />
+          <DriverCard
+            title="Sales Health"
+            accent="text-purple-700"
+            action="View Full Report →"
+            icon="funnel"
+            rows={[
+              ["Leads", "1,240", "↑ 15%", "↑ 18%"],
+              ["Lead → First Visit", "40%", "↑ 6pp", "↑ 5pp"],
+              ["SCP → NCM", "43%", "↓ 2pp", "↑ 1pp"],
+              ["NCM → Recurring", "71%", "↑ 5pp", "↑ 4pp"],
+              ["Lead Response Time", "2.2 hrs", "", "↓ 1.2 hrs"],
+              ["Pipeline Value", "$1.24M", "", "↑ 18%"],
+            ]}
+          />
 
-          <DriverCard title="Marketing Health" accent="text-purple-700" action="View Full Report →" icon="pie" rows={[
-            ["Email Open Rate", "54%", "↑ 6pp", "↑ 7pp"],
-            ["SMS Open Rate", "82%", "↑ 4pp", "↑ 5pp"],
-            ["Paid Ad ROAS", "4.1x", "↑ 0.6x", "↑ 1.1x"],
-            ["CAC", "$16.38", "↓ 8%", "↓ 12%"],
-            ["Marketing Spend", "$94,600", "↑ 15%", "↑ 18%"],
-            ["Leads from Campaigns", "1,240", "↑ 22%", "↑ 25%"],
-          ]} />
+          <DriverCard
+            title="Marketing Health"
+            accent="text-purple-700"
+            action="View Full Report →"
+            icon="pie"
+            rows={[
+              ["Email Open Rate", "54%", "↑ 6pp", "↑ 7pp"],
+              ["SMS Open Rate", "82%", "↑ 4pp", "↑ 5pp"],
+              ["Paid Ad ROAS", "4.1x", "↑ 0.6x", "↑ 1.1x"],
+              ["CAC", "$16.38", "↓ 8%", "↓ 12%"],
+              ["Marketing Spend", "$94,600", "↑ 15%", "↑ 18%"],
+              ["Leads from Campaigns", "1,240", "↑ 22%", "↑ 25%"],
+            ]}
+          />
 
-          <DriverCard title="Retention & Stability" accent="text-orange-600" action="View Full Report →" icon="shield" rows={[
-            ["Freeze Rate", "4.2%", "↑ 0.6pp", "↓ 0.4pp"],
-            ["Churn Rate", "1.8%", "↓ 0.2pp", "↓ 0.3pp"],
-            ["Low Utilization", "312", "↑ 18%", "↑ 22%"],
-            ["Utilization", "6.2", "↑ 0.6", "↑ 0.9"],
-            ["Membership Stability", "87%", "↑ 3pp", "↑ 4pp"],
-          ]} />
+          <DriverCard
+            title="Retention & Stability"
+            accent="text-orange-600"
+            action="View Full Report →"
+            icon="shield"
+            rows={[
+              ["Freeze Rate", "4.2%", "↑ 0.6pp", "↓ 0.4pp"],
+              ["Churn Rate", "1.8%", "↓ 0.2pp", "↓ 0.3pp"],
+              ["Low Utilization", "312", "↑ 18%", "↑ 22%"],
+              ["Utilization", "6.2", "↑ 0.6", "↑ 0.9"],
+              ["Membership Stability", "87%", "↑ 3pp", "↑ 4pp"],
+            ]}
+          />
         </section>
 
         <section className="bg-white border border-slate-200 rounded-2xl p-4 shadow-sm">
@@ -122,7 +153,9 @@ export default function App() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-5 gap-4">
-            {studioCards.map((studio) => <StudioCard key={studio.name} studio={studio} />)}
+            {studioCards.map((studio) => (
+              <StudioCard key={studio.name} studio={studio} />
+            ))}
           </div>
         </section>
 
@@ -149,13 +182,23 @@ export default function App() {
                   <tr key={row.insight} className="border-t border-slate-100">
                     <td className="py-3 px-4">
                       <div className="flex items-center gap-3">
-                        <span className={`w-8 h-8 rounded-full flex items-center justify-center font-bold shrink-0 ${row.color}`}>{row.icon}</span>
+                        <span className={`w-8 h-8 rounded-full flex items-center justify-center font-bold shrink-0 ${row.color}`}>
+                          {row.icon}
+                        </span>
                         <span className="font-medium text-slate-700">{row.insight}</span>
                       </div>
                     </td>
-                    <td className="py-3 px-4"><span className="bg-purple-50 text-purple-700 px-3 py-1 rounded-full text-xs font-semibold">{row.category}</span></td>
-                    <td className={`py-3 px-4 font-bold ${row.impact === "Medium" ? "text-orange-600" : "text-green-700"}`}>{row.impact}</td>
-                    <td className={`py-3 px-4 font-bold ${row.trend.includes("Negative") ? "text-red-600" : "text-green-700"}`}>{row.trend}</td>
+                    <td className="py-3 px-4">
+                      <span className="bg-purple-50 text-purple-700 px-3 py-1 rounded-full text-xs font-semibold">
+                        {row.category}
+                      </span>
+                    </td>
+                    <td className={`py-3 px-4 font-bold ${row.impact === "Medium" ? "text-orange-600" : "text-green-700"}`}>
+                      {row.impact}
+                    </td>
+                    <td className={`py-3 px-4 font-bold ${row.trend.includes("Negative") ? "text-red-600" : "text-green-700"}`}>
+                      {row.trend}
+                    </td>
                     <td className="py-3 px-4 text-slate-500">{row.updated}</td>
                   </tr>
                 ))}
@@ -169,21 +212,29 @@ export default function App() {
 }
 
 function SectionTitle({ title, noMargin }) {
-  return <h2 className={`text-lg font-black uppercase tracking-wide text-purple-700 ${noMargin ? "" : "mb-3"}`}>{title}</h2>;
+  return (
+    <h2 className={`text-lg font-black uppercase tracking-wide text-purple-700 ${noMargin ? "" : "mb-3"}`}>
+      {title}
+    </h2>
+  );
 }
 
 function SnapshotCard({ icon, title, value, change, color, sub }) {
   return (
     <div className="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm min-h-[150px]">
       <div className="flex items-start gap-4">
-        <div className={`w-12 h-12 rounded-full flex items-center justify-center font-black text-xl shrink-0 ${color}`}>{icon}</div>
+        <div className={`w-12 h-12 rounded-full flex items-center justify-center font-black text-xl shrink-0 ${color}`}>
+          {icon}
+        </div>
         <div className="min-w-0">
           <p className="text-xs font-black uppercase text-slate-600 leading-tight">{title}</p>
           <div className="flex items-end gap-2 mt-3">
             <p className="text-3xl font-black whitespace-nowrap">{value}</p>
             <p className="text-sm font-bold text-green-700 whitespace-nowrap">{change}</p>
           </div>
-          <p className="text-xs text-slate-500 mt-4 leading-snug">{sub || "vs Apr 1 – Apr 30, 2025"}</p>
+          <p className="text-xs text-slate-500 mt-4 leading-snug">
+            {sub || "vs Apr 1 – Apr 30, 2025"}
+          </p>
         </div>
       </div>
     </div>
@@ -192,18 +243,23 @@ function SnapshotCard({ icon, title, value, change, color, sub }) {
 
 function DriverCard({ title, accent, action, rows, icon }) {
   return (
-    <div className="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm">
+    <div className="bg-gradient-to-b from-white to-slate-50 border border-slate-200 rounded-2xl p-5 shadow-sm h-[520px] overflow-hidden">
       <div className="flex items-start justify-between mb-4 gap-3">
-        <h3 className={`text-2xl leading-tight font-black uppercase ${accent}`}>{title}</h3>
-        <button className="text-purple-700 text-sm font-bold whitespace-nowrap">{action}</button>
+        <h3 className={`text-xl leading-tight font-black uppercase ${accent}`}>
+          {title}
+        </h3>
+        <button className="text-purple-700 text-sm font-bold whitespace-nowrap">
+          {action}
+        </button>
       </div>
 
-      <div className="grid grid-cols-1 2xl:grid-cols-[120px_1fr] gap-5 items-center">
+      <div className="grid grid-cols-[140px_1fr] gap-6 items-center mt-6">
         <div className="flex items-center justify-center">
           {icon === "funnel" && <Funnel />}
           {icon === "pie" && <Pie />}
           {icon === "shield" && <Shield />}
         </div>
+
         <MetricRows rows={rows} />
       </div>
     </div>
@@ -220,12 +276,20 @@ function MetricRows({ rows }) {
           <span>vs Last Month</span>
           <span>vs LY</span>
         </div>
+
         {rows.map(([metric, value, lm, ly]) => (
-          <div key={metric} className="grid grid-cols-[1.4fr_90px_110px_80px] gap-2 border-t border-slate-100 py-3 items-center">
+          <div
+            key={metric}
+            className="grid grid-cols-[1.4fr_90px_110px_80px] gap-2 border-t border-slate-100 py-2 items-center"
+          >
             <span className="font-semibold text-slate-700 leading-tight">{metric}</span>
             <span className="font-black">{value}</span>
-            <span className={`font-bold ${String(lm).includes("↓") ? "text-red-600" : "text-green-700"}`}>{lm}</span>
-            <span className={`font-bold ${String(ly).includes("↓") ? "text-red-600" : "text-green-700"}`}>{ly}</span>
+            <span className={`font-bold ${String(lm).includes("↓") ? "text-red-600" : "text-green-700"}`}>
+              {lm}
+            </span>
+            <span className={`font-bold ${String(ly).includes("↓") ? "text-red-600" : "text-green-700"}`}>
+              {ly}
+            </span>
           </div>
         ))}
       </div>
@@ -234,15 +298,32 @@ function MetricRows({ rows }) {
 }
 
 function Funnel() {
-  return <div className="space-y-2 w-24"><div className="h-12 bg-purple-700 rounded-t-sm" /><div className="h-12 bg-purple-500 mx-2" /><div className="h-12 bg-purple-300 mx-4" /><div className="h-12 bg-purple-200 mx-6" /><div className="h-12 bg-purple-100 mx-8 rounded-b-sm" /></div>;
+  return (
+    <div className="space-y-3 w-32">
+      <div className="h-14 bg-purple-700 rounded-md" />
+      <div className="h-14 bg-purple-500 mx-2 rounded-md" />
+      <div className="h-14 bg-purple-300 mx-4 rounded-md" />
+      <div className="h-14 bg-purple-200 mx-6 rounded-md" />
+      <div className="h-14 bg-purple-100 mx-8 rounded-md" />
+    </div>
+  );
 }
 
 function Pie() {
-  return <div className="w-20 h-20 rounded-full bg-gradient-to-br from-purple-700 via-purple-300 to-purple-100 border-4 border-purple-50" />;
+  return (
+    <div className="relative w-28 h-28">
+      <div className="absolute inset-0 rounded-full bg-gradient-to-br from-purple-700 via-purple-400 to-purple-100" />
+      <div className="absolute inset-4 rounded-full bg-white" />
+    </div>
+  );
 }
 
 function Shield() {
-  return <div className="w-20 h-20 rounded-full bg-orange-100 flex items-center justify-center text-4xl">🛡</div>;
+  return (
+    <div className="w-28 h-28 rounded-full bg-orange-100 flex items-center justify-center">
+      <div className="w-14 h-14 rounded-2xl bg-orange-500/80" />
+    </div>
+  );
 }
 
 function StudioCard({ studio }) {
@@ -250,7 +331,9 @@ function StudioCard({ studio }) {
     <div className="border border-slate-200 rounded-2xl p-4 bg-white shadow-sm">
       <div className="flex items-center justify-between mb-5">
         <h3 className="font-black text-slate-900">{studio.name}</h3>
-        <span className={`text-xs font-bold px-3 py-1 rounded-full ${studio.healthColor}`}>{studio.health}</span>
+        <span className={`text-xs font-bold px-3 py-1 rounded-full ${studio.healthColor}`}>
+          {studio.health}
+        </span>
       </div>
 
       <div className="grid grid-cols-3 gap-3 text-sm">
@@ -273,7 +356,9 @@ function MiniMetric({ label, value, change }) {
     <div>
       <p className="text-[10px] text-slate-500 font-bold leading-tight">{label}</p>
       <p className="text-lg font-black mt-1">{value}</p>
-      <p className={`text-xs font-bold mt-1 ${change.includes("↓") ? "text-red-600" : "text-green-700"}`}>{change}</p>
+      <p className={`text-xs font-bold mt-1 ${change.includes("↓") ? "text-red-600" : "text-green-700"}`}>
+        {change}
+      </p>
     </div>
   );
 }
@@ -281,5 +366,18 @@ function MiniMetric({ label, value, change }) {
 function Sparkline({ color, fill }) {
   const points = [12, 18, 16, 24, 20, 22, 18, 26, 30, 21, 25, 19, 23, 27, 22, 28, 31];
   const polyline = points.map((p, i) => `${i * 12},${50 - p}`).join(" ");
-  return <div className={`mt-5 rounded-xl ${fill} p-2`}><svg viewBox="0 0 200 55" className="w-full h-14"><polyline points={polyline} fill="none" stroke="currentColor" strokeWidth="3" className={color} /></svg></div>;
+
+  return (
+    <div className={`mt-5 rounded-xl ${fill} p-2`}>
+      <svg viewBox="0 0 200 55" className="w-full h-14">
+        <polyline
+          points={polyline}
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="3"
+          className={color}
+        />
+      </svg>
+    </div>
+  );
 }
