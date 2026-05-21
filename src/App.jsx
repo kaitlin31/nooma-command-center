@@ -11,7 +11,7 @@ const studioCards = [
 const intelligenceRows = [
   { icon: "↗", insight: "Dallas revenue is pacing 28% ahead of last month. Strongest studio momentum this week.", category: "Studio Performance", impact: "High", trend: "↑ Positive", updated: "2h ago", color: "bg-green-100 text-green-700" },
   { icon: "⚠", insight: "Freeze rate increased 0.6pp in Fayetteville. Monitor retention closely.", category: "Retention", impact: "Medium", trend: "↓ Negative", updated: "4h ago", color: "bg-yellow-100 text-yellow-700" },
-  { icon: "📣", insight: "Summer Sweat Club campaign delivering 4.2x ROI. Top performing campaign this month.", category: "Marketing", impact: "High", trend: "↑ Positive", updated: "6h ago", color: "bg-purple-100 text-purple-700" },
+  { icon: "📣", insight: "Summer Sweat Club campaign delivering 4.2x ROI. Top performing campaign this month.", category: "Marketing", impact: "High", trend: "↑ Positive", updated: "6h ago", color: "bg-[#5928e5]text-purple-700" },
   { icon: "👥", insight: "Lead response time improved company-wide. Now averaging 2.2 hours.", category: "Sales", impact: "High", trend: "↑ Positive", updated: "8h ago", color: "bg-cyan-100 text-cyan-700" },
   { icon: "$", insight: "Recurring revenue grew 5pp month over month. Strong stability trend.", category: "Revenue", impact: "High", trend: "↑ Positive", updated: "10h ago", color: "bg-blue-100 text-blue-700" },
 ];
