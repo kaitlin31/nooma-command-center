@@ -19,7 +19,7 @@ const intelligenceRows = [
 export default function App() {
   return (
     <div className="min-h-screen bg-slate-50 text-slate-950 flex">
-      <aside className="w-64 shrink-0 bg-gradient-to-b from-purple-100 via-violet-50 to-white border-r border-purple-100 p-5 flex flex-col justify-between">
+      <aside className="w-72 shrink-0 bg-gradient-to-b from-purple-100 via-violet-50 to-white border-r border-purple-100 p-6 flex flex-col justify-between">
         <div>
           <div className="flex items-center gap-3 mb-8">
             <div className="text-4xl font-black text-purple-700">N¹</div>
@@ -62,7 +62,7 @@ export default function App() {
         </div>
       </aside>
 
-      <main className="flex-1 p-7 space-y-6 overflow-x-hidden">
+      <main className="flex-1 p-8 max-w-[1800px] mx-auto space-y-7 overflow-x-hidden">
         <header className="flex items-start justify-between border-b border-slate-200 pb-5">
           <div>
             <h1 className="text-4xl font-black tracking-tight text-slate-950">Revenue Command Center</h1>
@@ -87,7 +87,7 @@ export default function App() {
           </div>
         </section>
 
-        <section className="grid grid-cols-3 gap-4">
+        <section className="grid grid-cols-3 gap-6">
           <DriverCard title="Sales Health" accent="text-purple-700" action="View Full Report →" icon="funnel" rows={[
             ["Leads", "1,240", "↑ 15%", "↑ 18%"],
             ["Lead → First Visit", "40%", "↑ 6pp", "↑ 5pp"],
@@ -108,14 +108,14 @@ export default function App() {
 
           <DriverCard title="Retention & Stability" accent="text-orange-600" action="View Full Report →" icon="shield" rows={[
             ["Freeze Rate", "4.2%", "↑ 0.6pp", "↓ 0.4pp"],
-            ["Churn Rate (Monthly)", "1.8%", "↓ 0.2pp", "↓ 0.3pp"],
-            ["Low Utilization Members", "312", "↑ 18%", "↑ 22%"],
-            ["Utilization (Avg Classes / Mo.)", "6.2", "↑ 0.6", "↑ 0.9"],
+            ["Churn Rate", "1.8%", "↓ 0.2pp", "↓ 0.3pp"],
+            ["Low Utilization", "312", "↑ 18%", "↑ 22%"],
+            ["Utilization", "6.2", "↑ 0.6", "↑ 0.9"],
             ["Membership Stability", "87%", "↑ 3pp", "↑ 4pp"],
           ]} />
         </section>
 
-        <section className="bg-white border border-slate-200 rounded-2xl p-4 shadow-sm">
+        <section className="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm">
           <div className="flex items-center justify-between mb-4">
             <SectionTitle title="Studio Performance" noMargin />
             <button className="text-purple-700 font-bold text-sm">View All Studios →</button>
@@ -125,7 +125,7 @@ export default function App() {
           </div>
         </section>
 
-        <section className="bg-white border border-slate-200 rounded-2xl p-4 shadow-sm">
+        <section className="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm">
           <div className="flex items-center justify-between mb-3">
             <SectionTitle title="Revenue Intelligence" noMargin />
             <button className="text-purple-700 font-bold text-sm">View All Insights →</button>
@@ -171,16 +171,16 @@ function SectionTitle({ title, noMargin }) {
 
 function SnapshotCard({ icon, title, value, change, color, sub }) {
   return (
-    <div className="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm min-h-36">
+    <div className="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm min-h-[160px]">
       <div className="flex items-start gap-4">
-        <div className={`w-12 h-12 rounded-full flex items-center justify-center font-black text-xl ${color}`}>{icon}</div>
-        <div className="flex-1">
-          <p className="text-xs font-black uppercase text-slate-600">{title}</p>
+        <div className={`w-12 h-12 rounded-full flex items-center justify-center font-black text-xl shrink-0 ${color}`}>{icon}</div>
+        <div className="flex-1 min-w-0">
+          <p className="text-xs font-black uppercase text-slate-600 leading-tight">{title}</p>
           <div className="flex items-end gap-3 mt-3">
-            <p className="text-2xl font-black">{value}</p>
-            <p className="text-sm font-bold text-green-700">{change}</p>
+            <p className="text-[2rem] leading-none font-black whitespace-nowrap">{value}</p>
+            <p className="text-sm font-bold text-green-700 whitespace-nowrap">{change}</p>
           </div>
-          <p className="text-xs text-slate-500 mt-4">{sub || "vs Apr 1 – Apr 30, 2025"}</p>
+          <p className="text-xs text-slate-500 mt-4 leading-snug">{sub || "vs Apr 1 – Apr 30, 2025"}</p>
         </div>
       </div>
     </div>
@@ -189,12 +189,12 @@ function SnapshotCard({ icon, title, value, change, color, sub }) {
 
 function DriverCard({ title, accent, action, rows, icon }) {
   return (
-    <div className="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm">
-      <div className="flex items-center justify-between mb-4">
-        <h3 className={`text-lg font-black uppercase ${accent}`}>{title}</h3>
-        <button className="text-purple-700 text-sm font-bold">{action}</button>
+    <div className="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm min-h-[520px]">
+      <div className="flex items-start justify-between mb-5 gap-4">
+        <h3 className={`text-[24px] leading-tight font-black uppercase ${accent}`}>{title}</h3>
+        <button className="text-purple-700 text-sm font-bold whitespace-nowrap">{action}</button>
       </div>
-      <div className="grid grid-cols-[110px_1fr] gap-5 items-center">
+      <div className="grid grid-cols-[120px_1fr] gap-6 items-center">
         <div className="flex items-center justify-center">
           {icon === "funnel" && <Funnel />}
           {icon === "pie" && <Pie />}
@@ -209,15 +209,15 @@ function DriverCard({ title, accent, action, rows, icon }) {
 function MetricRows({ rows }) {
   return (
     <div className="text-sm">
-      <div className="grid grid-cols-[1fr_90px_90px_70px] text-xs text-slate-500 pb-2">
+      <div className="grid grid-cols-[1.4fr_110px_110px_90px] text-xs text-slate-500 pb-2 gap-2">
         <span />
         <span>This Month</span>
         <span>vs Last Month</span>
         <span>vs LY</span>
       </div>
       {rows.map(([metric, value, lm, ly]) => (
-        <div key={metric} className="grid grid-cols-[1fr_90px_90px_70px] border-t border-slate-100 py-3 items-center">
-          <span className="font-semibold text-slate-700">{metric}</span>
+        <div key={metric} className="grid grid-cols-[1.4fr_110px_110px_90px] gap-2 border-t border-slate-100 py-3 items-center">
+          <span className="font-semibold text-slate-700 leading-tight">{metric}</span>
           <span className="font-black">{value}</span>
           <span className={`font-bold ${String(lm).includes("↓") ? "text-red-600" : "text-green-700"}`}>{lm}</span>
           <span className={`font-bold ${String(ly).includes("↓") ? "text-red-600" : "text-green-700"}`}>{ly}</span>
@@ -260,7 +260,7 @@ function StudioCard({ studio }) {
 }
 
 function MiniMetric({ label, value, change }) {
-  return <div><p className="text-[10px] text-slate-500 font-bold">{label}</p><p className="text-lg font-black mt-1">{value}</p><p className={`text-xs font-bold mt-1 ${change.includes("↓") ? "text-red-600" : "text-green-700"}`}>{change}</p></div>;
+  return <div><p className="text-[10px] text-slate-500 font-bold leading-tight">{label}</p><p className="text-lg font-black mt-1">{value}</p><p className={`text-xs font-bold mt-1 ${change.includes("↓") ? "text-red-600" : "text-green-700"}`}>{change}</p></div>;
 }
 
 function Sparkline({ color, fill }) {
