@@ -154,7 +154,7 @@ export default function App() {
             <button className="text-purple-700 font-bold text-sm">View All Studios →</button>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-5 gap-4">
+          <div className="grid grid-cols-5 gap-4">
             {studioCards.map((studio) => (
               <StudioCard key={studio.name} studio={studio} />
             ))}
