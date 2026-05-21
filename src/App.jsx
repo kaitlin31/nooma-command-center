@@ -312,15 +312,7 @@ function StudioCard({ studio }) {
         <MiniMetric label="Lead → Recurring" value={studio.conversion} change={studio.change3} />
       </div>
 
-      <div className="border-t border-slate-100 mt-4 pt-3 flex items-center justify-between">
-  <span className="text-xs text-slate-500 font-semibold">
-    Updated 2h ago
-  </span>
-
-  <button className="text-purple-700 font-bold text-sm">
-    View Studio →
-  </button>
-</div>
+   <Sparkline color={studio.line} fill={studio.fill} />
 
     <div className="border-t border-slate-100 mt-4 pt-3 flex items-center justify-between">
   <span className="text-xs text-slate-500 font-semibold">
