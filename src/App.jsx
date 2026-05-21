@@ -16,6 +16,48 @@ const intelligenceRows = [
   { icon: "$", insight: "Recurring revenue grew 5pp month over month. Strong stability trend.", category: "Revenue", impact: "High", trend: "↑ Positive", updated: "10h ago", color: "bg-blue-100 text-blue-700" },
 ];
 
+const healthCards = [
+  {
+    title: "Sales Health",
+    accent: "text-purple-700",
+    score: "82",
+    status: "Strong",
+    scoreColor: "text-purple-700 bg-purple-50 border-purple-100",
+    metrics: [
+      ["Lead → First Visit", "40%", "↑ 6pp", "green"],
+      ["SCP → NCM", "43%", "↓ 2pp", "red"],
+      ["NCM → Recurring", "71%", "↑ 5pp", "green"],
+    ],
+    insight: "Conversion remains healthy, with SCP → NCM as the current watch point.",
+  },
+  {
+    title: "Marketing Health",
+    accent: "text-purple-700",
+    score: "88",
+    status: "High ROI",
+    scoreColor: "text-purple-700 bg-purple-50 border-purple-100",
+    metrics: [
+      ["Email Open Rate", "54%", "↑ 6pp", "green"],
+      ["Paid Ad ROAS", "4.1x", "↑ 0.6x", "green"],
+      ["CAC", "$16.38", "↓ 8%", "green"],
+    ],
+    insight: "Marketing is producing efficient demand with strong campaign ROI.",
+  },
+  {
+    title: "Retention & Stability",
+    accent: "text-orange-600",
+    score: "76",
+    status: "Watch",
+    scoreColor: "text-orange-700 bg-orange-50 border-orange-100",
+    metrics: [
+      ["Freeze Rate", "4.2%", "↑ 0.6pp", "yellow"],
+      ["Churn Rate", "1.8%", "↓ 0.2pp", "green"],
+      ["Stability", "87%", "↑ 3pp", "green"],
+    ],
+    insight: "Overall retention is stable, but freeze movement needs monitoring.",
+  },
+];
+
 export default function App() {
   return (
     <div className="min-h-screen bg-slate-50 text-slate-950 flex">
@@ -101,50 +143,9 @@ export default function App() {
         </section>
 
         <section className="grid grid-cols-1 xl:grid-cols-3 gap-6">
-          <GlanceCard
-            title="Sales Health"
-            accent="text-purple-700"
-            action="View Full Report →"
-            icon="funnel"
-            metrics={[
-              ["Leads", "1,240", "↑ 15%", "green"],
-              ["Lead → First Visit", "40%", "↑ 6pp", "green"],
-              ["SCP → NCM", "43%", "↓ 2pp", "red"],
-              ["NCM → Recurring", "71%", "↑ 5pp", "green"],
-              ["Lead Response", "2.2 hrs", "↓ 1.2 hrs", "green"],
-              ["Pipeline Value", "$1.24M", "↑ 18%", "green"],
-            ]}
-          />
-
-          <GlanceCard
-            title="Marketing Health"
-            accent="text-purple-700"
-            action="View Full Report →"
-            icon="pie"
-            metrics={[
-              ["Email Open Rate", "54%", "↑ 6pp", "green"],
-              ["SMS Open Rate", "82%", "↑ 4pp", "green"],
-              ["Paid Ad ROAS", "4.1x", "↑ 0.6x", "green"],
-              ["CAC", "$16.38", "↓ 8%", "green"],
-              ["Marketing Spend", "$94.6K", "↑ 15%", "green"],
-              ["Campaign Leads", "1,240", "↑ 22%", "green"],
-            ]}
-          />
-
-          <GlanceCard
-            title="Retention & Stability"
-            accent="text-orange-600"
-            action="View Full Report →"
-            icon="shield"
-            metrics={[
-              ["Freeze Rate", "4.2%", "↑ 0.6pp", "yellow"],
-              ["Churn Rate", "1.8%", "↓ 0.2pp", "green"],
-              ["Low Utilization", "312", "↑ 18%", "yellow"],
-              ["Avg Utilization", "6.2", "↑ 0.6", "green"],
-              ["Membership Stability", "87%", "↑ 3pp", "green"],
-              ["At-Risk Revenue", "$18.4K", "↓ 7%", "green"],
-            ]}
-          />
+          {healthCards.map((card) => (
+            <HealthCard key={card.title} card={card} />
+          ))}
         </section>
 
         <section className="bg-white border border-slate-200 rounded-2xl p-4 shadow-sm">
@@ -242,43 +243,42 @@ function SnapshotCard({ icon, title, value, change, color, sub }) {
   );
 }
 
-function GlanceCard({ title, accent, action, icon, metrics }) {
+function HealthCard({ card }) {
   return (
     <div className="bg-gradient-to-b from-white to-slate-50 border border-slate-200 rounded-2xl p-5 shadow-sm">
-      <div className="flex items-start justify-between mb-5 gap-3">
-        <h3 className={`text-xl leading-tight font-black uppercase ${accent}`}>
-          {title}
+      <div className="flex items-start justify-between gap-3 mb-5">
+        <h3 className={`text-xl font-black uppercase leading-tight ${card.accent}`}>
+          {card.title}
         </h3>
         <button className="text-purple-700 text-sm font-bold whitespace-nowrap">
-          {action}
+          View Full Report →
         </button>
       </div>
 
-      <div className="grid grid-cols-[120px_1fr] gap-5 items-center">
-        <div className="flex items-center justify-center">
-          {icon === "funnel" && <Funnel />}
-          {icon === "pie" && <Pie />}
-          {icon === "shield" && <Shield />}
+      <div className="flex items-center justify-between gap-5 mb-5">
+        <div className={`rounded-2xl border p-5 w-36 text-center ${card.scoreColor}`}>
+          <p className="text-xs font-black uppercase tracking-wide">Health Score</p>
+          <p className="text-5xl font-black mt-2">{card.score}</p>
+          <p className="text-sm font-bold mt-1">{card.status}</p>
         </div>
 
-        <div className="grid grid-cols-2 gap-3">
-          {metrics.map(([label, value, change, status]) => (
-            <MiniGlanceMetric
-              key={label}
-              label={label}
-              value={value}
-              change={change}
-              status={status}
-            />
+        <div className="flex-1 space-y-3">
+          {card.metrics.map(([label, value, change, status]) => (
+            <HealthMetric key={label} label={label} value={value} change={change} status={status} />
           ))}
         </div>
+      </div>
+
+      <div className="rounded-2xl bg-white border border-slate-100 p-4">
+        <p className="text-xs uppercase font-black text-slate-400 mb-1">CRO Insight</p>
+        <p className="text-sm font-semibold text-slate-700 leading-relaxed">{card.insight}</p>
       </div>
     </div>
   );
 }
 
-function MiniGlanceMetric({ label, value, change, status }) {
-  const statusColor =
+function HealthMetric({ label, value, change, status }) {
+  const color =
     status === "red"
       ? "text-red-600 bg-red-50"
       : status === "yellow"
@@ -286,43 +286,12 @@ function MiniGlanceMetric({ label, value, change, status }) {
       : "text-green-700 bg-green-50";
 
   return (
-    <div className="rounded-xl border border-slate-100 bg-white p-3 shadow-sm">
-      <p className="text-[11px] font-bold uppercase text-slate-500 leading-tight">
-        {label}
-      </p>
-      <p className="text-2xl font-black mt-1">{value}</p>
-      <p className={`inline-flex mt-2 px-2 py-1 rounded-full text-xs font-bold ${statusColor}`}>
-        {change}
-      </p>
-    </div>
-  );
-}
-
-function Funnel() {
-  return (
-    <div className="space-y-2 w-24">
-      <div className="h-10 bg-purple-700 rounded-md" />
-      <div className="h-10 bg-purple-500 mx-2 rounded-md" />
-      <div className="h-10 bg-purple-300 mx-4 rounded-md" />
-      <div className="h-10 bg-purple-200 mx-6 rounded-md" />
-      <div className="h-10 bg-purple-100 mx-8 rounded-md" />
-    </div>
-  );
-}
-
-function Pie() {
-  return (
-    <div className="relative w-24 h-24">
-      <div className="absolute inset-0 rounded-full bg-gradient-to-br from-purple-700 via-purple-400 to-purple-100" />
-      <div className="absolute inset-4 rounded-full bg-white" />
-    </div>
-  );
-}
-
-function Shield() {
-  return (
-    <div className="w-24 h-24 rounded-full bg-orange-100 flex items-center justify-center">
-      <div className="w-12 h-12 rounded-2xl bg-orange-500/80" />
+    <div className="flex items-center justify-between border-b border-slate-100 pb-2">
+      <div>
+        <p className="text-sm font-bold text-slate-700">{label}</p>
+        <p className={`inline-flex mt-1 px-2 py-1 rounded-full text-xs font-bold ${color}`}>{change}</p>
+      </div>
+      <p className="text-2xl font-black">{value}</p>
     </div>
   );
 }
