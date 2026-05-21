@@ -19,7 +19,7 @@ const intelligenceRows = [
 export default function App() {
   return (
     <div className="min-h-screen bg-slate-50 text-slate-950 flex">
-      <aside className="w-72 shrink-0 bg-gradient-to-b from-purple-100 via-violet-50 to-white border-r border-purple-100 p-6 flex flex-col justify-between">
+      <aside className="w-72 shrink-0 bg-gradient-to-b from-purple-100 via-violet-50 to-white border-r border-purple-100 p-5 flex flex-col justify-between">
         <div>
           <div className="flex items-center gap-3 mb-8">
             <div className="text-4xl font-black text-purple-700">N¹</div>
@@ -44,7 +44,7 @@ export default function App() {
               ["⚙", "Settings"],
             ].map(([icon, label, active]) => (
               <div key={label} className={`flex items-center gap-3 rounded-xl px-4 py-3 ${active ? "bg-purple-200/80 text-purple-800 shadow-sm" : "text-purple-950 hover:bg-purple-100/70"}`}>
-                <span className="text-lg">{icon}</span>
+                <span>{icon}</span>
                 <span>{label}</span>
               </div>
             ))}
@@ -62,10 +62,10 @@ export default function App() {
         </div>
       </aside>
 
-      <main className="flex-1 p-8 max-w-[1800px] mx-auto space-y-7 overflow-x-hidden">
+      <main className="flex-1 p-8 space-y-7 overflow-x-hidden">
         <header className="flex items-start justify-between border-b border-slate-200 pb-5">
           <div>
-            <h1 className="text-4xl font-black tracking-tight text-slate-950">Revenue Command Center</h1>
+            <h1 className="text-4xl font-black tracking-tight">Revenue Command Center</h1>
             <p className="text-slate-500 mt-1 text-lg">Executive overview of Nooma Studios performance</p>
           </div>
 
@@ -77,7 +77,7 @@ export default function App() {
 
         <section>
           <SectionTitle title="Executive Snapshot" />
-          <div className="grid grid-cols-6 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-6 gap-4">
             <SnapshotCard icon="$" title="Revenue MTD" value="$436,006" change="↑ 22%" color="bg-purple-600 text-white" />
             <SnapshotCard icon="◎" title="Revenue vs Goal" value="108%" change="↑ 8pp" color="bg-green-100 text-green-700" sub="Goal: $403,000" />
             <SnapshotCard icon="↗" title="Forecasted Month End" value="$512,000" change="↑ 18%" color="bg-purple-100 text-purple-700" sub="Forecast confidence: High" />
@@ -87,7 +87,7 @@ export default function App() {
           </div>
         </section>
 
-        <section className="grid grid-cols-3 gap-6">
+        <section className="grid grid-cols-1 xl:grid-cols-3 gap-6">
           <DriverCard title="Sales Health" accent="text-purple-700" action="View Full Report →" icon="funnel" rows={[
             ["Leads", "1,240", "↑ 15%", "↑ 18%"],
             ["Lead → First Visit", "40%", "↑ 6pp", "↑ 5pp"],
@@ -115,23 +115,25 @@ export default function App() {
           ]} />
         </section>
 
-        <section className="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm">
+        <section className="bg-white border border-slate-200 rounded-2xl p-4 shadow-sm">
           <div className="flex items-center justify-between mb-4">
             <SectionTitle title="Studio Performance" noMargin />
             <button className="text-purple-700 font-bold text-sm">View All Studios →</button>
           </div>
-          <div className="grid grid-cols-5 gap-4">
+
+          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-5 gap-4">
             {studioCards.map((studio) => <StudioCard key={studio.name} studio={studio} />)}
           </div>
         </section>
 
-        <section className="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm">
+        <section className="bg-white border border-slate-200 rounded-2xl p-4 shadow-sm">
           <div className="flex items-center justify-between mb-3">
             <SectionTitle title="Revenue Intelligence" noMargin />
             <button className="text-purple-700 font-bold text-sm">View All Insights →</button>
           </div>
-          <div className="overflow-hidden rounded-xl border border-slate-100">
-            <table className="w-full text-sm">
+
+          <div className="overflow-x-auto rounded-xl border border-slate-100">
+            <table className="w-full min-w-[900px] text-sm">
               <thead className="bg-slate-50 text-slate-500 text-xs uppercase">
                 <tr>
                   <th className="text-left py-3 px-4">Insight</th>
@@ -141,12 +143,13 @@ export default function App() {
                   <th className="text-left py-3 px-4">Last Updated</th>
                 </tr>
               </thead>
+
               <tbody>
                 {intelligenceRows.map((row) => (
                   <tr key={row.insight} className="border-t border-slate-100">
                     <td className="py-3 px-4">
                       <div className="flex items-center gap-3">
-                        <span className={`w-8 h-8 rounded-full flex items-center justify-center font-bold ${row.color}`}>{row.icon}</span>
+                        <span className={`w-8 h-8 rounded-full flex items-center justify-center font-bold shrink-0 ${row.color}`}>{row.icon}</span>
                         <span className="font-medium text-slate-700">{row.insight}</span>
                       </div>
                     </td>
@@ -171,13 +174,13 @@ function SectionTitle({ title, noMargin }) {
 
 function SnapshotCard({ icon, title, value, change, color, sub }) {
   return (
-    <div className="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm min-h-[160px]">
+    <div className="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm min-h-[150px]">
       <div className="flex items-start gap-4">
         <div className={`w-12 h-12 rounded-full flex items-center justify-center font-black text-xl shrink-0 ${color}`}>{icon}</div>
-        <div className="flex-1 min-w-0">
+        <div className="min-w-0">
           <p className="text-xs font-black uppercase text-slate-600 leading-tight">{title}</p>
-          <div className="flex items-end gap-3 mt-3">
-            <p className="text-[2rem] leading-none font-black whitespace-nowrap">{value}</p>
+          <div className="flex items-end gap-2 mt-3">
+            <p className="text-3xl font-black whitespace-nowrap">{value}</p>
             <p className="text-sm font-bold text-green-700 whitespace-nowrap">{change}</p>
           </div>
           <p className="text-xs text-slate-500 mt-4 leading-snug">{sub || "vs Apr 1 – Apr 30, 2025"}</p>
@@ -189,12 +192,13 @@ function SnapshotCard({ icon, title, value, change, color, sub }) {
 
 function DriverCard({ title, accent, action, rows, icon }) {
   return (
-    <div className="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm min-h-[520px]">
-      <div className="flex items-start justify-between mb-5 gap-4">
-        <h3 className={`text-[24px] leading-tight font-black uppercase ${accent}`}>{title}</h3>
+    <div className="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm">
+      <div className="flex items-start justify-between mb-4 gap-3">
+        <h3 className={`text-2xl leading-tight font-black uppercase ${accent}`}>{title}</h3>
         <button className="text-purple-700 text-sm font-bold whitespace-nowrap">{action}</button>
       </div>
-      <div className="grid grid-cols-[120px_1fr] gap-6 items-center">
+
+      <div className="grid grid-cols-1 2xl:grid-cols-[120px_1fr] gap-5 items-center">
         <div className="flex items-center justify-center">
           {icon === "funnel" && <Funnel />}
           {icon === "pie" && <Pie />}
@@ -208,21 +212,23 @@ function DriverCard({ title, accent, action, rows, icon }) {
 
 function MetricRows({ rows }) {
   return (
-    <div className="text-sm">
-      <div className="grid grid-cols-[1.4fr_110px_110px_90px] text-xs text-slate-500 pb-2 gap-2">
-        <span />
-        <span>This Month</span>
-        <span>vs Last Month</span>
-        <span>vs LY</span>
-      </div>
-      {rows.map(([metric, value, lm, ly]) => (
-        <div key={metric} className="grid grid-cols-[1.4fr_110px_110px_90px] gap-2 border-t border-slate-100 py-3 items-center">
-          <span className="font-semibold text-slate-700 leading-tight">{metric}</span>
-          <span className="font-black">{value}</span>
-          <span className={`font-bold ${String(lm).includes("↓") ? "text-red-600" : "text-green-700"}`}>{lm}</span>
-          <span className={`font-bold ${String(ly).includes("↓") ? "text-red-600" : "text-green-700"}`}>{ly}</span>
+    <div className="text-sm overflow-x-auto">
+      <div className="min-w-[520px]">
+        <div className="grid grid-cols-[1.4fr_90px_110px_80px] text-xs text-slate-500 pb-2 gap-2">
+          <span />
+          <span>This Month</span>
+          <span>vs Last Month</span>
+          <span>vs LY</span>
         </div>
-      ))}
+        {rows.map(([metric, value, lm, ly]) => (
+          <div key={metric} className="grid grid-cols-[1.4fr_90px_110px_80px] gap-2 border-t border-slate-100 py-3 items-center">
+            <span className="font-semibold text-slate-700 leading-tight">{metric}</span>
+            <span className="font-black">{value}</span>
+            <span className={`font-bold ${String(lm).includes("↓") ? "text-red-600" : "text-green-700"}`}>{lm}</span>
+            <span className={`font-bold ${String(ly).includes("↓") ? "text-red-600" : "text-green-700"}`}>{ly}</span>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
@@ -246,12 +252,15 @@ function StudioCard({ studio }) {
         <h3 className="font-black text-slate-900">{studio.name}</h3>
         <span className={`text-xs font-bold px-3 py-1 rounded-full ${studio.healthColor}`}>{studio.health}</span>
       </div>
+
       <div className="grid grid-cols-3 gap-3 text-sm">
         <MiniMetric label="Revenue MTD" value={studio.revenue} change={studio.change1} />
         <MiniMetric label="Recurring %" value={studio.recurring} change={studio.change2} />
         <MiniMetric label="Lead → Recurring" value={studio.conversion} change={studio.change3} />
       </div>
+
       <Sparkline color={studio.line} fill={studio.fill} />
+
       <div className="text-right mt-2">
         <button className="text-purple-700 font-bold text-sm">View Studio →</button>
       </div>
@@ -260,7 +269,13 @@ function StudioCard({ studio }) {
 }
 
 function MiniMetric({ label, value, change }) {
-  return <div><p className="text-[10px] text-slate-500 font-bold leading-tight">{label}</p><p className="text-lg font-black mt-1">{value}</p><p className={`text-xs font-bold mt-1 ${change.includes("↓") ? "text-red-600" : "text-green-700"}`}>{change}</p></div>;
+  return (
+    <div>
+      <p className="text-[10px] text-slate-500 font-bold leading-tight">{label}</p>
+      <p className="text-lg font-black mt-1">{value}</p>
+      <p className={`text-xs font-bold mt-1 ${change.includes("↓") ? "text-red-600" : "text-green-700"}`}>{change}</p>
+    </div>
+  );
 }
 
 function Sparkline({ color, fill }) {
