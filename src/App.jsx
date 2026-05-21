@@ -101,47 +101,48 @@ export default function App() {
         </section>
 
         <section className="grid grid-cols-1 xl:grid-cols-3 gap-6">
-          <DriverCard
+          <GlanceCard
             title="Sales Health"
             accent="text-purple-700"
             action="View Full Report →"
             icon="funnel"
-            rows={[
-              ["Leads", "1,240", "↑ 15%", "↑ 18%"],
-              ["Lead → First Visit", "40%", "↑ 6pp", "↑ 5pp"],
-              ["SCP → NCM", "43%", "↓ 2pp", "↑ 1pp"],
-              ["NCM → Recurring", "71%", "↑ 5pp", "↑ 4pp"],
-              ["Lead Response Time", "2.2 hrs", "", "↓ 1.2 hrs"],
-              ["Pipeline Value", "$1.24M", "", "↑ 18%"],
+            metrics={[
+              ["Leads", "1,240", "↑ 15%", "green"],
+              ["Lead → First Visit", "40%", "↑ 6pp", "green"],
+              ["SCP → NCM", "43%", "↓ 2pp", "red"],
+              ["NCM → Recurring", "71%", "↑ 5pp", "green"],
+              ["Lead Response", "2.2 hrs", "↓ 1.2 hrs", "green"],
+              ["Pipeline Value", "$1.24M", "↑ 18%", "green"],
             ]}
           />
 
-          <DriverCard
+          <GlanceCard
             title="Marketing Health"
             accent="text-purple-700"
             action="View Full Report →"
             icon="pie"
-            rows={[
-              ["Email Open Rate", "54%", "↑ 6pp", "↑ 7pp"],
-              ["SMS Open Rate", "82%", "↑ 4pp", "↑ 5pp"],
-              ["Paid Ad ROAS", "4.1x", "↑ 0.6x", "↑ 1.1x"],
-              ["CAC", "$16.38", "↓ 8%", "↓ 12%"],
-              ["Marketing Spend", "$94,600", "↑ 15%", "↑ 18%"],
-              ["Leads from Campaigns", "1,240", "↑ 22%", "↑ 25%"],
+            metrics={[
+              ["Email Open Rate", "54%", "↑ 6pp", "green"],
+              ["SMS Open Rate", "82%", "↑ 4pp", "green"],
+              ["Paid Ad ROAS", "4.1x", "↑ 0.6x", "green"],
+              ["CAC", "$16.38", "↓ 8%", "green"],
+              ["Marketing Spend", "$94.6K", "↑ 15%", "green"],
+              ["Campaign Leads", "1,240", "↑ 22%", "green"],
             ]}
           />
 
-          <DriverCard
+          <GlanceCard
             title="Retention & Stability"
             accent="text-orange-600"
             action="View Full Report →"
             icon="shield"
-            rows={[
-              ["Freeze Rate", "4.2%", "↑ 0.6pp", "↓ 0.4pp"],
-              ["Churn Rate", "1.8%", "↓ 0.2pp", "↓ 0.3pp"],
-              ["Low Utilization", "312", "↑ 18%", "↑ 22%"],
-              ["Utilization", "6.2", "↑ 0.6", "↑ 0.9"],
-              ["Membership Stability", "87%", "↑ 3pp", "↑ 4pp"],
+            metrics={[
+              ["Freeze Rate", "4.2%", "↑ 0.6pp", "yellow"],
+              ["Churn Rate", "1.8%", "↓ 0.2pp", "green"],
+              ["Low Utilization", "312", "↑ 18%", "yellow"],
+              ["Avg Utilization", "6.2", "↑ 0.6", "green"],
+              ["Membership Stability", "87%", "↑ 3pp", "green"],
+              ["At-Risk Revenue", "$18.4K", "↓ 7%", "green"],
             ]}
           />
         </section>
@@ -241,10 +242,10 @@ function SnapshotCard({ icon, title, value, change, color, sub }) {
   );
 }
 
-function DriverCard({ title, accent, action, rows, icon }) {
+function GlanceCard({ title, accent, action, icon, metrics }) {
   return (
-    <div className="bg-gradient-to-b from-white to-slate-50 border border-slate-200 rounded-2xl p-5 shadow-sm h-[520px] overflow-hidden">
-      <div className="flex items-start justify-between mb-4 gap-3">
+    <div className="bg-gradient-to-b from-white to-slate-50 border border-slate-200 rounded-2xl p-5 shadow-sm">
+      <div className="flex items-start justify-between mb-5 gap-3">
         <h3 className={`text-xl leading-tight font-black uppercase ${accent}`}>
           {title}
         </h3>
@@ -253,65 +254,65 @@ function DriverCard({ title, accent, action, rows, icon }) {
         </button>
       </div>
 
-      <div className="grid grid-cols-[140px_1fr] gap-6 items-center mt-6">
+      <div className="grid grid-cols-[120px_1fr] gap-5 items-center">
         <div className="flex items-center justify-center">
           {icon === "funnel" && <Funnel />}
           {icon === "pie" && <Pie />}
           {icon === "shield" && <Shield />}
         </div>
 
-        <MetricRows rows={rows} />
+        <div className="grid grid-cols-2 gap-3">
+          {metrics.map(([label, value, change, status]) => (
+            <MiniGlanceMetric
+              key={label}
+              label={label}
+              value={value}
+              change={change}
+              status={status}
+            />
+          ))}
+        </div>
       </div>
     </div>
   );
 }
 
-function MetricRows({ rows }) {
-  return (
-    <div className="text-sm overflow-x-auto">
-      <div className="min-w-[520px]">
-        <div className="grid grid-cols-[1.4fr_90px_110px_80px] text-xs text-slate-500 pb-2 gap-2">
-          <span />
-          <span>This Month</span>
-          <span>vs Last Month</span>
-          <span>vs LY</span>
-        </div>
+function MiniGlanceMetric({ label, value, change, status }) {
+  const statusColor =
+    status === "red"
+      ? "text-red-600 bg-red-50"
+      : status === "yellow"
+      ? "text-yellow-700 bg-yellow-50"
+      : "text-green-700 bg-green-50";
 
-        {rows.map(([metric, value, lm, ly]) => (
-          <div
-            key={metric}
-            className="grid grid-cols-[1.4fr_90px_110px_80px] gap-2 border-t border-slate-100 py-2 items-center"
-          >
-            <span className="font-semibold text-slate-700 leading-tight">{metric}</span>
-            <span className="font-black">{value}</span>
-            <span className={`font-bold ${String(lm).includes("↓") ? "text-red-600" : "text-green-700"}`}>
-              {lm}
-            </span>
-            <span className={`font-bold ${String(ly).includes("↓") ? "text-red-600" : "text-green-700"}`}>
-              {ly}
-            </span>
-          </div>
-        ))}
-      </div>
+  return (
+    <div className="rounded-xl border border-slate-100 bg-white p-3 shadow-sm">
+      <p className="text-[11px] font-bold uppercase text-slate-500 leading-tight">
+        {label}
+      </p>
+      <p className="text-2xl font-black mt-1">{value}</p>
+      <p className={`inline-flex mt-2 px-2 py-1 rounded-full text-xs font-bold ${statusColor}`}>
+        {change}
+      </p>
     </div>
   );
 }
 
 function Funnel() {
   return (
-    <div className="space-y-3 w-32">
-      <div className="h-14 bg-purple-700 rounded-md" />
-      <div className="h-14 bg-purple-500 mx-2 rounded-md" />
-      <div className="h-14 bg-purple-300 mx-4 rounded-md" />
-      <div className="h-14 bg-purple-200 mx-6 rounded-md" />
-      <div className="h-14 bg-purple-100 mx-8 rounded-md" />
+    <div className="space-y-2 w-24">
+      <div className="h-10 bg-purple-700 rounded-md" />
+      <div className="h-10 bg-purple-500 mx-2 rounded-md" />
+      <div className="h-10 bg-purple-300 mx-4 rounded-md" />
+      <div className="h-10 bg-purple-200 mx-6 rounded-md" />
+      <div className="h-10 bg-purple-100 mx-8 rounded-md" />
     </div>
   );
 }
 
 function Pie() {
   return (
-    <div className="relative w-28 h-28">
+    <div className="relative w-24 h-24">
       <div className="absolute inset-0 rounded-full bg-gradient-to-br from-purple-700 via-purple-400 to-purple-100" />
       <div className="absolute inset-4 rounded-full bg-white" />
     </div>
@@ -320,8 +321,8 @@ function Pie() {
 
 function Shield() {
   return (
-    <div className="w-28 h-28 rounded-full bg-orange-100 flex items-center justify-center">
-      <div className="w-14 h-14 rounded-2xl bg-orange-500/80" />
+    <div className="w-24 h-24 rounded-full bg-orange-100 flex items-center justify-center">
+      <div className="w-12 h-12 rounded-2xl bg-orange-500/80" />
     </div>
   );
 }
