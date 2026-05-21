@@ -132,7 +132,7 @@ export default function App() {
 
         <section>
           <SectionTitle title="Executive Snapshot" />
-          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-5 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-6 gap-4">
             <SnapshotCard icon="$" title="Revenue MTD" value="$436,006" change="↑ 22%" color="bg-purple-600 text-white" />
             <SnapshotCard icon="◎" title="Revenue vs Goal" value="108%" change="↑ 8pp" color="bg-green-100 text-green-700" sub="Goal: $403,000" />
             <SnapshotCard icon="↗" title="Forecasted Month End" value="$512,000" change="↑ 18%" color="bg-purple-100 text-purple-700" sub="Forecast confidence: High" />
@@ -312,7 +312,9 @@ function StudioCard({ studio }) {
         <MiniMetric label="Lead → Recurring" value={studio.conversion} change={studio.change3} />
       </div>
 
-     <div className="border-t border-slate-100 mt-4 pt-3 flex items-center justify-between">
+      <Sparkline color={studio.line} fill={studio.fill} />
+
+    <div className="border-t border-slate-100 mt-4 pt-3 flex items-center justify-between">
   <span className="text-xs text-slate-500 font-semibold">
     Updated 2h ago
   </span>
